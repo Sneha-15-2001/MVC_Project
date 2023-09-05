@@ -25,7 +25,7 @@ public class ProductController extends HttpServlet{
 		try {
 			ps.addproduct(p);
 			res.setContentType("text/html");
-			res.getWriter().println("<p style='color:green'>Product Created</p>");
+			res.getWriter().println("<p style='color:green;position:absolute;top:10%'>Product Created</p><br>");
 			req.getRequestDispatcher("AdminChoice.jsp").include(req, res);
 		} catch (SQLException |ClassNotFoundException e) {
 			res.setContentType("text/html");
