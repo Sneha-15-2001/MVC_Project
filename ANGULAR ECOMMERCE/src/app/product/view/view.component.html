@@ -1,0 +1,48 @@
+
+<div class="s003">
+    <form>
+        <div class="inner-form">
+            <div class="input-field first-wrap">
+                <select [(ngModel)]='category' name='category'>
+                    <option value='all'>All</option>
+                    <option *ngFor="let i of categoriesList" value="{{i}}">{{i}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>PRODUCT ID</th>
+            <th>PRODUCT NAME</th>
+            <th>DESCRIPTION</th>
+            <th>CATEGORY</th>
+            <th>PRICE</th>
+            <th>QUANTITY</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of prodList | category: category">
+            <td>{{ i.id }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.description }}</td>
+            <td>{{ i.category }}</td>
+            <td>{{ i.price | currency }}</td>
+            <td>{{ i.quantity }}</td>
+            <td>
+              <a routerLink="/product/edit/{{ i.id }}" class="btn btn-primary btn-sm">Edit</a>
+              <button class="btn btn-danger btn-sm" (click)="onDeleteClick(i.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+        <a routerLink="/product/create" class="btn btn-success">Add New Product</a>
+      </div>
+    </div>
+  </div>

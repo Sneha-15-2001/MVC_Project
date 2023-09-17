@@ -1,0 +1,168 @@
+<!-- <div class="alignment">
+    <form #productForm="ngForm" (ngSubmit)="dataSubmited()">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Product ID</label>
+            <input type="text" class="form-control" id="pid" placeholder="Enter Product ID" name="pid" [(ngModel)]="product.id" required #pid="ngModel" pattern="^[Pp].[0-9]+"/>
+            <div *ngIf="pid.touched">
+                <div *ngIf="pid.invalid">
+                    <small class="text-danger" *ngIf="pid.errors?.['required']">Product Id</small>
+                    <small class="text-danger" *ngIf="pid.errors?.['pattern']">Product Id should be like 'P123'</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="pname" placeholder="Enter Product Name" [(ngModel)]='product.name' name="pname" #pname="ngModel" required [class.is-invalid]="pname.invalid && pname.touched" pattern="^[A-za-z]+$" minlength="3">
+            <div *ngIf="pname.touched"> 
+                <div *ngIf="pname.invalid"> 
+                <small class="text-danger" *ngIf="pname.errors?.['required']">Employee Name Can't be empty</small>
+                <small class="text-danger" *ngIf="pname.errors?.['pattern']">Employee Name Should have only alphabets</small>
+                <small class="text-danger" *ngIf="pname.errors?.['minlength']">Employee Name Should have Min 3 Character</small>
+                </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="pdesc" placeholder="Enter Product Description" [(ngModel)]='product.description' name="pdesc" #pdesc="ngModel" required [class.is-invalid]="pdesc.invalid && pdesc.touched"  minlength="10" maxlength="45">
+            <div *ngIf="pdesc.touched"> 
+                <div *ngIf="pdesc.invalid"> 
+                <small class="text-danger" *ngIf="pdesc.errors?.['required']">Product Description Can't be empty</small>
+               
+                <small class="text-danger" *ngIf="pdesc.errors?.['minlength']">Product Description Should have Min 10 and Max 45 Character</small>
+                </div>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" placeholder="Enter Product Price"
+                [(ngModel)]='product.price' name="price" #price="ngModel" required
+                [class.is-invalid]="price.invalid && price.dirty || product.price <= 0 " min="1" />
+        
+            <div *ngIf="price.touched">
+                <div *ngIf="price.invalid">
+                    <small class="text-danger" *ngIf="price.errors?.['required']">Product price Can't be empty</small>
+                    <small class="text-danger" *ngIf="product.price <= 0 ">Price should be greater than 0</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" placeholder="Enter Product Quantity"
+                [(ngModel)]='product.quantity' name="quantity" #quantity="ngModel" required
+                [class.is-invalid]="quantity.invalid && quantity.dirty || product.quantity <= 0 " min="1" />
+        
+            <div *ngIf="quantity.touched">
+                <div *ngIf="quantity.invalid">
+                    <small class="text-danger" *ngIf="quantity.errors?.['required']">Product Quantity Can't be empty</small>
+                    <small class="text-danger" *ngIf="product.quantity <= 0 ">Quantity should be greater than 0</small>
+                </div>
+            </div>
+        </div>
+        
+       
+                   <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Product Category</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]='product.category' name="category" #category="ngModel" required [class.is-invalid]="category.invalid && category.touched && hasError" (blur)="validate(category.value)" (change)="validate(category.value)">
+                        <option value="default">--Select Department--</option>
+                        <option *ngFor="let i of categoriesList" value="{{i}}">{{i}}</option>
+                        
+                      </select>
+                      <div *ngIf="category.touched"> 
+                        <div *ngIf="category.invalid"> 
+                        <small class="text-danger" *ngIf="category.errors?.['required']">Employee department can't be empty</small></div>
+                        </div>
+                      <small class="text-danger" [class.d-none]="category.untouched || !hasError">Select Employee Department</small>
+                  </div>
+                  <button type="submit" class="btn btn-primary" [disabled]="productForm.form.invalid || hasError||product.price<=0||product.quantity<=0">Add Product</button>
+                  <button type="button" class="btn btn-danger">Clear</button>
+      
+    </form>
+</div> -->
+
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form #productForm="ngForm" (ngSubmit)="dataSubmited()" class="needs-validation" >
+        <h2 class="mb-4">Add Product</h2>
+        <small style="color:crimson;" *ngIf="errorMessage">{{ errorMessage}}</small>
+
+        <!-- Product ID -->
+        <div class="mb-3">
+          <label for="pid" class="form-label">Product ID</label>
+          <input type="text" class="form-control" id="pid" placeholder="Enter Product ID" name="pid" [(ngModel)]="product.id" required #pid="ngModel" pattern="^[Pp].[0-9]+"/>
+            <div *ngIf="pid.touched">
+                <div *ngIf="pid.invalid">
+                    <small class="text-danger" *ngIf="pid.errors?.['required']">Product Id</small>
+                    <small class="text-danger" *ngIf="pid.errors?.['pattern']">Product Id should be like 'P123'</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Name -->
+        <div class="mb-3">
+          <label for="pname" class="form-label">Product Name</label>
+          <input type="text" class="form-control" id="pname" placeholder="Enter Product Name" [(ngModel)]='product.name' name="pname" #pname="ngModel" required [class.is-invalid]="pname.invalid && pname.touched" minlength="3" />
+          <div class="invalid-feedback" *ngIf="pname.invalid && pname.touched">
+            <small class="text-danger" *ngIf="pname.errors?.['required']">Product Name is required</small>
+<!--             <small class="text-danger" *ngIf="pname.errors?.['pattern']">Product Name should have only alphabets</small>
+ -->            <small class="text-danger" *ngIf="pname.errors?.['minlength']">Product Name should have at least 3 characters</small>
+          </div>
+        </div>
+
+        <!-- Product Description -->
+        <div class="mb-3">
+          <label for="pdesc" class="form-label">Product Description</label>
+          <input type="text" class="form-control" id="pdesc" placeholder="Enter Product Description" [(ngModel)]='product.description' name="pdesc" #pdesc="ngModel" required [class.is-invalid]="pdesc.invalid && pdesc.touched" minlength="10" maxlength="45" />
+          <div class="invalid-feedback" *ngIf="pdesc.invalid && pdesc.touched">
+            <small class="text-danger" *ngIf="pdesc.errors?.['required']">Product Description is required</small>
+            <small class="text-danger" *ngIf="pdesc.errors?.['minlength']">Product Description should have between 10 and 45 characters</small>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input type="number" class="form-control" id="price" placeholder="Enter Product Price" [(ngModel)]='product.price' name="price" #price="ngModel" required [class.is-invalid]="price.invalid && price.dirty || product.price <= 0" min="1" />
+          <div class="invalid-feedback" *ngIf="price.invalid && price.touched">
+            <small class="text-danger" *ngIf="price.errors?.['required']">Price is required</small>
+            <small class="text-danger" *ngIf="product.price <= 0">Price should be greater than 0</small>
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input type="number" class="form-control" id="quantity" placeholder="Enter Product Quantity" [(ngModel)]='product.quantity' name="quantity" #quantity="ngModel" required [class.is-invalid]="quantity.invalid && quantity.dirty || product.quantity <= 0" min="1" />
+          <div class="invalid-feedback" *ngIf="quantity.invalid && quantity.touched">
+            <small class="text-danger" *ngIf="quantity.errors?.['required']">Quantity is required</small>
+            <small class="text-danger" *ngIf="product.quantity <= 0">Quantity should be greater than 0</small>
+          </div>
+        </div>
+
+        <!-- Product Category -->
+        <div class="mb-3">
+          <label for="category" class="form-label">Product Category</label>
+          <select class="form-select" aria-label="Select Product Category" [(ngModel)]='product.category' name="category" #category="ngModel" required [class.is-invalid]="category.invalid && category.touched && hasError" (blur)="validate(category.value)" (change)="validate(category.value)">
+            <option value="default">--Select Category--</option>
+            <option *ngFor="let i of categoriesList" value="{{i}}">{{i}}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="category.invalid && category.touched">
+            <small class="text-danger" *ngIf="category.errors?.['required']">Product Category is required</small>
+          </div>
+          <small class="text-danger" [class.d-none]="category.untouched || !hasError">Select a Product Category</small>
+        </div>
+        <!-- Buttons -->
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary" [disabled]="productForm.form.invalid || hasError || product.price <= 0 || product.quantity <= 0">Add Product</button>
+          <input type="reset" value="Reset">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

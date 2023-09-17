@@ -1,0 +1,14 @@
+<br>
+<div appProddetail [category]="product.category" class="card  mb-3" style="max-width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">PRODUCT {{product.name}} DETAILS</h5>
+      <p class="card-text"> PRODUCT ID:{{product.id}}<br>Product Name:{{product.name}}<br>Product Description:{{product.description}}<br>Product Price:{{product.price}}<br>Product quantity:{{product.quantity}}<br>Category:{{product.category}}
+        <div class="btn-group" role="group" aria-label="Edit and Delete">
+            <a routerLink="/product/edit/{{product.id}}" class="btn btn-primary">Edit</a>
+            <button class="btn btn-danger"(click)="onDeleteClick(product.id)">Delete</button>
+
+
+        </div>
+      </div>
+  </div>
+  <router-outlet></router-outlet>
